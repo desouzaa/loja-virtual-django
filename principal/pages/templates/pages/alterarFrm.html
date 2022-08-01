@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block title %} Alterar senha - Bulldog {% endblock %}
+
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="row">
+      <nav id="sidebarMenu" class="shadow col-md-3 col-lg-2 d-md-block bg-light sidebar mt-5 mb-1">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+                <span data-feather="home"></span>
+                Minha conta
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+                <span data-feather="Alterar -senha"></span>
+                Alterar minha senha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+                <span data-feather="Meus-dados"></span>
+                Meus dados
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+                <span data-feather="Meus-pedidos"></span>
+                Meus pedidos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Solicitações"></span>
+                Solicitações
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Rastrear-pedido"></span>
+                Rastrear pedido
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+                  <span data-feather="Lista-de-desejos"></span>
+                  Lista de desejos
+                </a>
+              </li>
+          </ul>
+
+
+          
+  
+         
+        </div>
+      </nav>
+  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        
+  
+        <div class="e bg-light mt-5 mb-5 shadow">
+
+            <form class="d-flex justify-content-center" id="form_alterarpass" method="POST" action="/alterar_senha/"> 
+              {% csrf_token %}
+    
+                <div class="col-md-6">
+
+                    <h3 class="text-center mt-3 mb-5">ALTERAR SENHA</h3>
+                    
+                    
+                 
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Senha atual</span>
+                        <input class="form-control" placeholder="Insira sua senha atual" type="password"
+                        id="senhaatual" name="senhaatual" required>
+                        
+                    </div>
+                    
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Nova senha</span>
+                        <input class="form-control" placeholder="Confirme sua nova senha" type="password"
+                        id="novasenha" name="novasenha" required minlength="8" maxlength="25">
+                        
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Confirmar senha</span>
+                        <input class="form-control" placeholder="Insira sua nova senha" type="password"
+                        id="novasenha2" name="novasenha2" required minlength="8" maxlength="25" onblur="return verificarSenha()">
+                        
+                    </div>   
+                      
+                    <div class="d-flex justify-content-center"> 
+                      
+                        {% if msg is not None %}
+                        <div class="alert alert-danger mt-3 mb-3" style="color: red;">{{msg}}</div>
+                        {% endif %}
+                      
+                        <h6 id='messageSenha'></h6>
+                        <br></div>
+                    <div class="d-flex justify-content-center">
+                        
+                      <input class=" btn-dark text-center rounded btn-lg mb-5 shadow" type="submit" value="Enviar">
+                    </div>
+        </div>
+                      
+                 
+
+                </form>
+
+     </div>
+
+                
+           
+                
+    </div>
+</div>
+      
+    
+
+  <div style="height: 80px;"></div>
+  {% endblock %}
+
+{% block script %}
+<script>
+	function verificarSenha(){
+	
+	
+		if ($('#novasenha').val() == $('#novasenha2').val()) {
+
+			$('#novasenha').css('color', 'green');
+			$('#novasenha2').css('color', 'green');
+			$('#messageSenha').html('Ok').css('color', 'green');
+
+		} else if($('#novasenha').val() != $('#novasenha2').val()){
+
+			$('#messageSenha').html('As senhas não conferem').css('color', 'red');
+			document.getElementById('novasenha').value=("");
+			document.getElementById('novasenha2').value=("");
+		}
+	}
+	
+
+</script>
+ {% endblock script %}
+
+

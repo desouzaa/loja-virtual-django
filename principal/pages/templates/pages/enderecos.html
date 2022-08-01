@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% block title %} Novo endereço - Bulldog  {% endblock %}
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+{% block content %}
+
+
+
+<div class="container-fluid">
+
+	<div class="row">
+		<nav id="sidebarMenu" class="shadow col-md-2 col-sm-12 col-lg-2 d-md-block bg-light sidebar mt-5 mb-1">
+			<div class="position-sticky pt-3">
+			  <ul class="nav flex-column">
+				<li class="nav-item">
+				  <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+					<span data-feather="home"></span>
+					Minha conta
+				  </a>
+				</li>
+				<li class="nav-item">
+				  <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+					<span data-feather="Alterar -senha"></span>
+					Alterar minha senha
+				  </a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+					<span data-feather="Meus-dados"></span>
+					Meus dados
+				  </a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+					<span data-feather="Meus-pedidos"></span>
+					Meus pedidos
+				  </a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link text-dark" href="#">
+					<span data-feather="Solicitações"></span>
+					Solicitações
+				  </a>
+				</li>
+				<li class="nav-item">
+				  <a class="nav-link text-dark" href="#">
+					<span data-feather="Rastrear-pedido"></span>
+					Rastrear pedido
+				  </a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+					  <span data-feather="Lista-de-desejos"></span>
+					  Lista de desejos
+					</a>
+				  </li>
+			  </ul>
+	
+	
+			  
+	  
+			 
+			</div>
+		  </nav>
+
+		<main class="col-md-10 col-lg-10 col-sm-12 col-xs-12 p-4">
+		
+
+			<div class="shadow bg-light mt-5 mb-5 p-4">
+
+			<h3 class="text-center p-3 mt-3 mb-5">CADASTRAR NOVO ENDEREÇO</h3>
+
+			<form class="d-flex justify-content-center" id="form_cadastro" method="POST" action="/cadastrarEndereco/"> {% csrf_token %}
+
+					<div class="col-lg-10 col-md-10 col-sm-10">
+
+
+						<div class="form-floating mb-3">
+		
+		
+							<input value="" placeholder="Insira somente números" type="text" name="cep" id="cep"
+								required minlength="8" maxlength="8" onblur="pesquisacep(this.value);"
+								class="form-control" >
+							<label for="cep">CEP</label>
+						</div>
+						<div class="form-floating mb-3">
+							
+							<input value="" type="text" id="cidade" name="cidade" required minlength="2" maxlength="50"
+							class="form-control" placeholder="Cidade" >
+							<label for="cidade">Cidade</label>
+						</div>
+						<div class="form-floating mb-3">
+							
+							<input value="" type="text" id="uf" name="uf" required minlength="2" maxlength="30"
+							class="form-control" placeholder="Estado" aria-label="UF">
+							<label for="uf">UF</label>
+						</div>
+					
+						<div class="form-floating mb-3">
+							
+							<input value="" type="text" name="rua" id="rua" required minlength="2" maxlength="50"
+							placeholder="Rua" class="form-control" >
+							<label for="rua">Rua</label>
+						</div>
+					
+						<div class="form-floating mb-3">
+							
+							<input value="" type="text" id="numero" name="numero" required maxlength="10" class="form-control"
+							placeholder="Número" >
+							<label for="numero">Número</label>
+						</div>
+					
+						<div class="form-floating mb-3">
+						
+							<input value="" type="text" name="bairro" id="bairro" minlength="2" maxlength="50" required
+							class="form-control" placeholder="Estado" aria-label="Bairro" >
+							<label for="bairro">Bairro</label>
+							
+						</div>
+							
+						<div class="form-floating mb-3">
+							
+							<input value="" placeholder="Complemento" type="text" name="complemento1" id="complemento1"
+							maxlength="50" class="form-control"  >
+							<label for="complemento1">Complemento</label>
+						</div>
+						<div class="form-floating mb-3">
+							
+							<input value="" placeholder="Complemento" type="text" id="complemento2" name="complemento2"
+							maxlength="50" class="form-control" >
+							<label for="complemento2">Complemento 2</label>
+						</div>
+
+
+
+
+						<div class="d-flex justify-content-center">
+							{% if msg is not None %}
+							<div class="alert alert-danger mt-3 mb-3" >{{msg}}</div>
+							{% endif %}
+						</div>
+
+
+						<div class="d-flex justify-content-center">
+
+							<input class=" btn-dark text-center rounded btn-lg shadow mb-5" type="submit" value="Salvar">
+						</div>
+					</div>
+
+
+				</form>
+
+
+			</div>
+			
+
+		
+
+
+
+	</div>
+</div>
+
+
+
+<div style="height: 80px;"></div>
+
+
+{% endblock %}
+
+
+
+
+{% block script %}
+
+
+<script>
+
+
+	function limpa_formulário_cep() {
+		//Limpa valores do formulário de cep.
+		document.getElementById('rua').value = ("");
+		document.getElementById('bairro').value = ("");
+		document.getElementById('cidade').value = ("");
+		document.getElementById('uf').value = ("");
+
+	}
+
+	function meu_callback(conteudo) {
+		if (!("erro" in conteudo)) {
+			//Atualiza os campos com os valores.
+			document.getElementById('rua').value = (conteudo.logradouro);
+			document.getElementById('bairro').value = (conteudo.bairro);
+			document.getElementById('cidade').value = (conteudo.localidade);
+			document.getElementById('uf').value = (conteudo.uf);
+
+		} //end if.
+		else {
+			//CEP não Encontrado.
+			limpa_formulário_cep();
+			alert("CEP não encontrado.");
+		}
+	}
+
+	function pesquisacep(valor) {
+
+		//Nova variável "cep" somente com dígitos.
+		var cep = valor.replace(/\D/g, '');
+
+		//Verifica se campo cep possui valor informado.
+		if (cep != "") {
+
+			//Expressão regular para validar o CEP.
+			var validacep = /^[0-9]{8}$/;
+
+			//Valida o formato do CEP.
+			if (validacep.test(cep)) {
+
+				//Preenche os campos com "..." enquanto consulta webservice.
+				document.getElementById('rua').value = "...";
+				document.getElementById('bairro').value = "...";
+				document.getElementById('cidade').value = "...";
+				document.getElementById('uf').value = "...";
+
+
+				//Cria um elemento javascript.
+				var script = document.createElement('script');
+
+				//Sincroniza com o callback.
+				script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+				//Insere script no documento e carrega o conteúdo.
+				document.body.appendChild(script);
+
+			} //end if.
+			else {
+				//cep é inválido.
+				limpa_formulário_cep();
+				alert("Formato de CEP inválido.");
+			}
+		} //end if.
+		else {
+			//cep sem valor, limpa formulário.
+			limpa_formulário_cep();
+		}
+	};
+
+</script>
+{% endblock script %}
+
+
+
+
+

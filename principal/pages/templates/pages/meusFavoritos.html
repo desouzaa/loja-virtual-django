@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %} Lista de desejos - Bulldog  {% endblock %}
+
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+
+{% block content %}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class=" shadow col-sm-12 col-md-3 col-lg-2 d-md-block bg-light sidebar mb-1 mt-5">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+                <span data-feather="home"></span>
+                Minha conta
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+                <span data-feather="Alterar -senha"></span>
+                Alterar minha senha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+                <span data-feather="Meus-dados"></span>
+                Meus dados
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+                <span data-feather="Meus-pedidos"></span>
+                Meus pedidos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Solicitações"></span>
+                Solicitações
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Rastrear-pedido"></span>
+                Rastrear pedido
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+                  <span data-feather="Lista-de-desejos"></span>
+                  Lista de desejos
+                </a>
+              </li>
+          </ul>
+
+
+          
+  
+         
+        </div>
+      </nav>
+  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+       
+  
+        <div class="">
+          
+            <div>
+                <h3 class="text-center mt-3 mb-3">Lista de desejos</h3>
+                
+                <div id="pai" class="row g-1 ">
+                  
+                  
+                  {% for prod in favoritos %}
+                  
+                      <div id="produtos"  valor="" class="col-md-3  ms-0 me-0">
+                        <div id="carrinho" class="card card2 p-3 simpleCart_shelfItem text-center rounded">
+                          <div class="align-self-center ">
+                            <a href="{% url 'single' prod.produto.id_produto %}">
+                              <img style="max-width: 150px;" src="{{prod.produto.fotoPr.url}}" class="img-fluid">
+                            </a>  
+                          </div>
+            
+                            <div class="product-details "><span class="fw-bolder d-block mt-3 mb-2 "><h6 class="fw-light fs-6 text-muted"></h6></span> 
+                        
+                              <span >{{prod.produto.nome}}</span>
+            
+                              <div class="buttons d-flex flex-row">
+                                       
+            
+                        <a class="w-100" href="{% url 'single' prod.produto.id_produto %}"><button class="btn btn-success cart-button w-100 btn-block ">Ver produto </button></a>
+                                    </div>
+                        
+                              <div class="weight"></div>
+                        
+                            </div>
+                          </div>
+                      </div>
+                   {% empty %}
+                   <div class="shadow alert alert-warning mt-3 mb-3">Nenhum produto adicionado na sua lista de desejos.<br>
+                    Para favoritar um produto, clique no ícone com coração na página do produto (" <i class="bi bi-heart-fill text-danger "> Adicionar a lista de desejos</i> ")</div>
+                  {% endfor %}
+                        
+                    </div>
+
+            </div>
+
+           
+            </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+<div style="height: 80px;"></div>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock script %}

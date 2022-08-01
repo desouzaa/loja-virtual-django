@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block title %} Editar - Bulldog  {% endblock %}
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+{% block content %}
+
+
+<div class="container-fluid mb-5">
+
+    <div class="row">
+        <nav id="sidebarMenu" class="shadow col-md-2 col-sm-12 col-lg-2 d-md-block bg-light sidebar mb-1 mt-5">
+            <div class="position-sticky pt-3">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+                    <span data-feather="home"></span>
+                    Minha conta
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+                    <span data-feather="Alterar -senha"></span>
+                    Alterar minha senha
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+                    <span data-feather="Meus-dados"></span>
+                    Meus dados
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+                    <span data-feather="Meus-pedidos"></span>
+                    Meus pedidos
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="#">
+                    <span data-feather="Solicitações"></span>
+                    Solicitações
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="#">
+                    <span data-feather="Rastrear-pedido"></span>
+                    Rastrear pedido
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+                      <span data-feather="Lista-de-desejos"></span>
+                      Lista de desejos
+                    </a>
+                  </li>
+              </ul>
+    
+    
+              
+      
+             
+            </div>
+          </nav>
+
+        <main class="col-md-10 col-lg-10 col-sm-12 col-xs-12 p-4">
+          
+            <div class="mt-5 mb-5 shadow bg-light p-4">
+
+
+
+                <form class="d-flex justify-content-center" id="form_cadastro" method="POST"
+                    action="/salvarDadosEditados/"> {% csrf_token %}
+
+                    <div class="col-lg-10 col-md-10 col-sm-auto">
+                        
+
+
+                        <h3 class="text-center mt-3 mb-5">EDITAR INFORMAÇÕES PESSOAIS</h3>
+
+
+                        <div class="form-floating mb-3">
+                          <input type="text" name="nome" id="nome" required minlength="2" maxlength="12"
+                          aria-label="Nome" class="form-control" placeholder="Somente o primeiro nome"
+                          value="{{clienteed.first_name}}">
+                          <label for="nome">Nome*</label>
+                        </div>
+                      
+                        <div class="form-floating mb-3">	
+                            
+                          <input placeholder="Sobrenome" type="text" id="sobrenome" name="sobrenome" required
+                          minlength="2" maxlength="30" aria-label="Sobrenome" class="form-control"
+                          value="{{clienteed.last_name}}">
+                          <label for="sobrenome" >Sobrenome*</label>
+                      
+                        </div>
+                      
+                      
+                        <div class="form-floating mb-3">
+                          <input type="text" name="cpf" id="cpf" minlength="11" maxlength="11" required readonly
+                          value="{{clienteed.cpf}}" class="form-control" aria-label="CPF" >
+                          <label for="cpf" id="msgcpf">CPF</label>
+                        </div>
+                      
+                        
+                          
+                      
+                        <div class="form-floating mb-3">
+                      
+                          <input class="form-check-input mt-0" type="radio" value="M" name="sexo" id="sexo" required> Masculino 
+                          <input class="form-check-input mt-0" type="radio" value="F" name="sexo" id="sexo" required> Feminino 
+                          <input class="form-check-input mt-0" type="radio" value="N" name="sexo" id="sexo" required > Prefiro não informar 
+                          
+                        </div>
+                      
+                        <div class="form-floating mb-3">
+                      
+                          <input type="date" id="nascimento" name="nascimento" required class="form-control"
+                          value="{{clienteed.datanascimento}}">
+                          <label for="nascimento" >Data de Nascimento </label>
+                      
+                        </div>
+                        <div class="form-floating mb-3">
+		
+                          <input readonly value="{{clienteed.email}}" id="email" name="email" required
+                          type="email" class="form-control" >
+                          <label for="email1">Email</label>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                        	{% if msg is not None %}
+                          <div class="alert alert-danger mt-3 mb-3">{{msg}}</div>
+                          {% endif %}
+                          
+                        </div>
+                        
+                        <div class="d-flex justify-content-center">
+    
+                        <input class=" btn-dark text-center rounded btn-lg shadow mb-5" type="submit" value="Salvar">
+                        </div>
+                    </div>
+
+                   
+                </form>
+
+
+            </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+<div style="height: 80px;"></div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,553 @@
+{% extends 'base.html' %}
+{% block title %} Carrinho - Bulldog {% endblock %}
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+{% block content %}
+
+
+<main>
+ 
+  <div class="container mt-5">
+    <div id="stepperCheckout" class="d-flex align-items-center justify-content-center mt-3 mb-3 overflow-auto">
+
+      <div class="d-flex overflow-auto">
+        <div id="steppCarrinho" class="d-flex justify-content-between flex-column align-items-center">
+          <svg width="36" height="36" viewBox="0 0 23 22" fill="none" xmlns="https://www.w3.org/2000/svg">
+            <path d="M7.09977 17.6C5.88981 17.6 4.91085 18.59 4.91085 19.8C4.91085 21.01 5.88981 22 7.09977 22C8.30973 22 9.2997 21.01 9.2997 19.8C9.2997 18.59 8.30973 17.6 7.09977 17.6ZM0.5 0V2.2H2.69992L6.65979 10.549L5.17484 13.244C4.99885 13.552 4.89985 13.915 4.89985 14.3C4.89985 15.51 5.88981 16.5 7.09977 16.5H20.2993V14.3H7.56176C7.40776 14.3 7.28677 14.179 7.28677 14.025L7.31977 13.893L8.30973 12.1H16.5044C17.3294 12.1 18.0554 11.649 18.4294 10.967L22.3672 3.828C22.458 3.66013 22.5037 3.47158 22.4998 3.28078C22.4959 3.08998 22.4426 2.90346 22.345 2.73943C22.2475 2.5754 22.1091 2.43947 21.9433 2.34492C21.7776 2.25037 21.5901 2.20044 21.3993 2.2H5.13084L4.09688 0H0.5ZM18.0994 17.6C16.8894 17.6 15.9105 18.59 15.9105 19.8C15.9105 21.01 16.8894 22 18.0994 22C19.3094 22 20.2993 21.01 20.2993 19.8C20.2993 18.59 19.3094 17.6 18.0994 17.6Z" fill="#006400"></path>
+          </svg>
+          <label class="">Carrinho</label>
+        </div>
+        <div class="">
+          <svg width="33" height="8" viewBox="0 0 33 8" fill="none" xmlns="https://www.w3.org/2000/svg">
+            <path d="M32.3536 4.35355C32.5488 4.15829 32.5488 3.84171 32.3536 3.64644L29.1716 0.464464C28.9763 0.269201 28.6597 0.269201 28.4645 0.464464C28.2692 0.659726 28.2692 0.976308 28.4645 1.17157L31.2929 4L28.4645 6.82842C28.2692 7.02369 28.2692 7.34027 28.4645 7.53553C28.6597 7.73079 28.9763 7.73079 29.1716 7.53553L32.3536 4.35355ZM4.37114e-08 4.5L32 4.5L32 3.5L-4.37114e-08 3.5L4.37114e-08 4.5Z" fill="#7F858D"></path>
+          </svg>
+        </div>
+        <div id="steppConfirmacao" class="d-flex justify-content-between flex-column align-items-center">
+          <svg width="36" height="36" viewBox="0 0 14 14" fill="none" xmlns="https://www.w3.org/2000/svg">
+            <path d="M5.1375 7C5.1375 7.47837 5.32696 7.93714 5.6642 8.2754C6.00144 8.61365 6.45884 8.80368 6.93577 8.80368C7.4127 8.80368 7.8701 8.61365 8.20734 8.2754C8.54458 7.93714 8.73404 7.47837 8.73404 7C8.73404 6.52163 8.54458 6.06286 8.20734 5.7246C7.8701 5.38635 7.4127 5.19632 6.93577 5.19632C6.45884 5.19632 6.00144 5.38635 5.6642 5.7246C5.32696 6.06286 5.1375 6.52163 5.1375 7ZM13.9073 6.58451C12.3852 3.36848 10.0843 1.75 7 1.75C3.91404 1.75 1.61482 3.36848 0.0927157 6.58612C0.0316634 6.71579 0 6.85741 0 7.0008C0 7.1442 0.0316634 7.28582 0.0927157 7.41549C1.61482 10.6315 3.91564 12.25 7 12.25C10.086 12.25 12.3852 10.6315 13.9073 7.41388C14.0309 7.15299 14.0309 6.85023 13.9073 6.58451ZM6.93577 9.83436C5.37513 9.83436 4.10992 8.56534 4.10992 7C4.10992 5.43466 5.37513 4.16564 6.93577 4.16564C8.49641 4.16564 9.76162 5.43466 9.76162 7C9.76162 8.56534 8.49641 9.83436 6.93577 9.83436Z" fill="#DEE0E4"></path>
+          </svg>
+          <label class="">Confirmação</label>
+        </div>
+        <div class="">
+            <svg width="33" height="8" viewBox="0 0 33 8" fill="none" xmlns="https://www.w3.org/2000/svg">
+              <path d="M32.3536 4.35355C32.5488 4.15829 32.5488 3.84171 32.3536 3.64644L29.1716 0.464464C28.9763 0.269201 28.6597 0.269201 28.4645 0.464464C28.2692 0.659726 28.2692 0.976308 28.4645 1.17157L31.2929 4L28.4645 6.82842C28.2692 7.02369 28.2692 7.34027 28.4645 7.53553C28.6597 7.73079 28.9763 7.73079 29.1716 7.53553L32.3536 4.35355ZM4.37114e-08 4.5L32 4.5L32 3.5L-4.37114e-08 3.5L4.37114e-08 4.5Z" fill="#7F858D"></path>
+            </svg>
+          </div>
+          <div id="steppPagamento" class="d-flex justify-content-between flex-column align-items-center">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="https://www.w3.org/2000/svg"><path d="M32.4 3H3.6C1.602 3 0.018 4.66875 0.018 6.75L0 29.25C0 31.3312 1.602 33 3.6 33H32.4C34.398 33 36 31.3312 36 29.25V6.75C36 4.66875 34.398 3 32.4 3ZM32.4 29.25H3.6V18H32.4V29.25ZM32.4 10.5H3.6V6.75H32.4V10.5Z" fill="#DEE0E4"></path>
+            </svg>
+            <label class="">Pagamento</label>
+          </div>
+          
+          <div class="">
+            <svg width="33" height="8" viewBox="0 0 33 8" fill="none" xmlns="https://www.w3.org/2000/svg"><path d="M32.3536 4.35355C32.5488 4.15829 32.5488 3.84171 32.3536 3.64644L29.1716 0.464464C28.9763 0.269201 28.6597 0.269201 28.4645 0.464464C28.2692 0.659726 28.2692 0.976308 28.4645 1.17157L31.2929 4L28.4645 6.82842C28.2692 7.02369 28.2692 7.34027 28.4645 7.53553C28.6597 7.73079 28.9763 7.73079 29.1716 7.53553L32.3536 4.35355ZM4.37114e-08 4.5L32 4.5L32 3.5L-4.37114e-08 3.5L4.37114e-08 4.5Z" fill="#7F858D"></path></svg>
+          </div>
+          <div id="steppConclusao" class="d-flex justify-content-between flex-column align-items-center">
+            <svg width="28" viewBox="0 0 28 28" fill="none" xmlns="https://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M28 14C28 21.732 21.732 28 14 28C6.26801 28 0 21.732 0 14C0 6.26801 6.26801 0 14 0C21.732 0 28 6.26801 28 14ZM5.83333 15.3242L10.8182 20.6111L22.1667 8.57484L20.6818 7L10.8182 17.4614L7.31818 13.7493L5.83333 15.3242Z" fill="#DEE0E4"></path>
+            </svg>
+            <label class="">Conclusão</label>
+          </div>
+        </div>
+      </div>
+
+    <h5 class="fs-5 text-danger text-center bg-warning fw-bold">{{msg}}</h5>
+    <section class=" mb-4">
+
+
+      <div class="row">
+
+
+        <div class="col-lg-8">
+
+          
+          <div class="card wish-list mb-4">
+            
+            <div class="card-body">
+              
+              <h5 class="mb-4 text-center mb-5"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="https://www.w3.org/2000/svg" size="22"><path d="M18.3335 7.50676H14.3418L10.6835 2.03529C10.6073 1.92192 10.5043 1.82904 10.3837 1.76481C10.2631 1.70058 10.1285 1.66699 9.99183 1.66699C9.85516 1.66699 9.72059 1.70058 9.59997 1.76481C9.47935 1.82904 9.37639 1.92192 9.30016 2.03529L5.64183 7.50676H1.66683C1.2085 7.50676 0.833496 7.88152 0.833496 8.33956C0.833496 8.41451 0.841829 8.48946 0.866829 8.56441L2.9835 16.2844C3.17516 16.984 3.81683 17.5003 4.5835 17.5003H15.4168C16.1835 17.5003 16.8252 16.984 17.0252 16.2844L19.1418 8.56441L19.1668 8.33956C19.1668 7.88152 18.7918 7.50676 18.3335 7.50676ZM9.99183 4.00069L12.3335 7.50676H7.65016L9.99183 4.00069ZM10.0002 14.1691C9.0835 14.1691 8.3335 13.4196 8.3335 12.5035C8.3335 11.5875 9.0835 10.8379 10.0002 10.8379C10.9168 10.8379 11.6668 11.5875 11.6668 12.5035C11.6668 13.4196 10.9168 14.1691 10.0002 14.1691Z" fill="#006400"></path> </svg> MEU CARRINHO (<span id="simpleCart_quantity" class="fs-5 simpleCart_quantity"></span>)</h5>
+
+              <div id="textocarrinho" class="d-none text-center text-secondary fw-bold fs-5"><div class="shadow alert alert-light mt-3 mb-5 text-center">Carrinho vazio! Veja alguns de nossos produtos clicando abaixo<br><br>
+                <a class="fs-5 text-success" href="{% url 'products' categoria='all' %}">Ver produtos</a> 
+                
+               </div></div>
+              <div id="conteudocarrinho" class="table-responsive simpleCart_items text-dark"></div>
+
+
+              <hr class="mb-5 mt-5">
+
+              <p class="text-success mb-0"><i class="bi bi-info-circle mr-1"></i> Não demore para finalizar a compra,
+                adicionar itens ao seu carrinho não significa reservá-los</p>
+
+            </div>
+          </div>
+          
+          <div id="enddiv" class="card mb-4">
+            <div class="card-body">
+              
+              <h5 class="mb-4 text-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="https://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.4243 23.3261L11.986 24L12.585 23.2886C12.6606 23.198 12.7544 23.0951 12.8616 22.9776L12.8617 22.9775C13.0201 22.8039 13.2078 22.5982 13.4087 22.3526L13.5684 22.1709C16.0593 19.3375 20.9719 13.7493 20.9719 8.98596C20.9719 4.04368 16.9282 0 11.986 0C7.04368 0 3 4.04368 3 8.98596C3 13.8908 8.16693 19.6942 10.6755 22.4649C10.8582 22.6933 11.027 22.8799 11.1734 23.0417L11.1734 23.0417L11.1734 23.0418C11.267 23.1452 11.3513 23.2385 11.4243 23.3261ZM7.86719 8.42435C7.86719 10.7083 9.70182 12.5429 11.9858 12.5429C14.2697 12.5429 16.1043 10.7083 16.1043 8.42435C16.1043 6.14042 14.2697 4.30579 11.9858 4.30579C9.70182 4.30579 7.86719 6.14042 7.86719 8.42435Z" fill="#006400"> </path> </svg> Prazo de entrega estimado e frete:</h5>
+              {% if user.is_authenticated %}
+
+
+
+
+              <ul class="list-group">
+                <h6 class="mb-2 text-center fw-light">Escolha um endereço cadastrado:</h6>
+
+                {% for endereco in enderecos %}
+
+                <div class="form-check">
+                  <input onclick="calcularfretecad(this.id), pesquisacep(this.id), adcstorage(this.value)" class="form-check-input" type="radio"
+                    name="enderecoescolhido" id="{{endereco.cep}}" value="{{endereco.id_endereco}}">
+                  <label class="form-check-label w-100" for="{{endereco.cep}}">
+
+                    <div class="card w-100 text-dark bg-light">
+                      <div class="card-body w-100">
+                        <h5 class="card-title">{{endereco.rua}}, {{endereco.numero}}</h5>
+                        <p class="card-text"><strong>CEP: </strong> {{endereco.cep}},
+                          {{endereco.bairro}}, {{endereco.cidade}}, {{endereco.estado}}<br>
+                          {{endereco.complemento1}} {{endereco.complemento2}}
+                        </p>
+
+                        <a href="{% url 'editarEndereco' endereco.id_endereco %}" class="btn btn-dark">Editar</a>
+                        <a href="{% url 'excluirEndereco2' endereco.id_endereco %}" class="btn btn-dark">Excluir</a>
+                      </div>
+                    </div>
+                    <h5 style="color: red; margin-top: 5px; font-size: medium;">{{msg2}}</h5>
+                    <div style="height: 18px;"></div>
+
+                  </label>
+                </div>
+
+
+                {% endfor %}
+                <li class="list-group-item bg-light rounded"><a class="text-dark" href="{% url 'enderecos' %}">Cadastrar
+                    novo endereço</a>
+                </li>
+
+
+
+              </ul>
+
+              
+              {% else %}
+
+              <div class="row align-items-center">
+
+                <div style="margin-top: 5%" class="col-md-10">
+                  <form class="mb-5 text-center" id="formDestino">
+                    <div class="input-group mb-2 border-dark ">
+
+                      <input required minlength="8" maxlength="8" onblur="pesquisacep(this.value);" name="sCepDestino"
+                        id="sCepDestino" type="text" class="form-control" placeholder="CEP digite somente números">
+                      <button type="button" id="calcular" class="btn btn-secondary">calcular</button>
+
+
+                    </div>
+                  </form>
+                </div>
+
+                <div style="margin-top: 0%;" class="col-md-2">
+                  <a class="text-center" target="_blank"
+                    href="https://buscacepinter.correios.com.br/app/endereco/index.php"><button
+                      class="btn-sm btn-secondary rounded "><small class="text-center">Não lembro meu
+                        CEP</small></button></a>
+                </div>
+
+
+              </div>
+
+              {% endif %}
+
+                          
+
+
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="col-lg-4">
+
+
+          <div id="checkoutdiv" class="card mb-4">
+            
+            <div class="card-body ">
+
+              <h5 class="mb-3 text-center">Total</h5>
+
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Valor em produtos:
+                  <span id="simpleCart_total" class="simpleCart_total fw-bold"></span>
+                </li>
+               
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+               <img id="loaderfrete" style='max-width: 10%;' class='mx-auto mt-3 mb-3 d-none' src='../../static/images/1487.gif'> 
+          <div id="divpaifrete" class="d-none card text-dark text-center mb-1 mt-1 ">
+            
+
+            <div id="divFrete" class="container-fluid" >
+
+              <input readonly id="cidade" class="mb-3 mt-3 border-0 bg-light text-dark fw-bold text-center"></h6>
+
+              <div id="sd" class="form-check mb-3 mt-3 text-start">
+                <input class="form-check-input" type="radio" name="opcaofrete" id="sedexinput">
+                <label id="valorFreteSedex" class="form-check-label" for="sedexinput">
+                </label>
+                <h6 class="fs-6 d-none" id="vfsedex"></h6>
+
+              </div>
+
+              
+              <div id="pc" class="form-check mb-3 mt-3 text-start">
+                <input class="form-check-input" type="radio" name="opcaofrete" id="pacinput">
+                <label id="valorFretePac" class="form-check-label" for="pacinput">
+                </label>
+                <h6 class="fs-6 d-none" id="vfpac"></h6>
+              </div>
+
+              
+
+              <div id="gratis" class="form-check mb-3 mt-3 text-start d-none">
+                <input class="form-check-input" type="radio" name="opcaofrete" id="gratisinput">
+                <label id="valorFreteGratis" class="form-check-label" for="gratisinput">
+                </label>
+                <h6 class="fs-6 d-none" id="vfgratis"></h6>
+              </div>
+
+
+            </div>
+          
+          </div>
+
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div style="font-size: smaller;" class="fw-lighter text-dark text-center mx-auto">Cupons de desconto poderão ser aplicados na próxima etapa</div>
+                </li>
+               
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Valor total</strong>
+                    <strong>
+                      <p class="mb-0 ">(Incluindo frete)</p>
+                    </strong>
+                  </div>
+                 <span id="simpleCart_grandTotal" class="simpleCart_grandTotal invisible fw-bold" id="valortotaclfrete"></span>
+                </li>
+              </ul>
+
+              
+              <h6 style="font-size: x-small;" class="text-dark text-center">Para continuar selecione um endereço e uma opçao de envio</h6>
+              <button type="button" class="w-100 btn btn-success btn-block waves-effect waves-light text-center disabled" id="botaocheckout"><a href="javascript:;" class="simpleCart_checkout"> IR PARA CONFIRMAÇÃO DO PEDIDO </a></button>
+           
+              
+
+
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+    </section>
+    
+    <div id="" class="mb-5 text-dark p-3">
+      <h6 style="font-size: x-small;" class="">Bulldog® é uma marca registrada de BULLDOG COMÉRCIO ELETRÔNICO| CNPJ: 00.000.000/0001-00 | Todos os direitos reservados. Os preços anunciados neste site ou via e-mail promocional podem ser alterados sem prévio aviso. A BULLDOG não é responsável por erros descritivos. As fotos contidas nesta página são meramente ilustrativas do produto e podem variar de acordo com o fornecedor/lote do fabricante. Este site trabalha 100% em criptografia SSL.&nbsp;
+        
+    </div>
+
+  </div>
+
+</main>
+
+
+{% endblock %}
+{% block script %}
+<!-- Funcao de consultar frete e prazo correios  -->
+<script type="text/javascript">
+
+
+  $('#calcular').click(function () {
+    
+    $('#loaderfrete').removeClass('d-none')
+    localStorage.setItem('shipping', 0)
+    var s = simpleCart.total();
+    s = parseFloat(s, 10)
+
+    if(s>1500){
+      $('#gratis').removeClass('d-none')
+      
+    }else if(s<1500){
+      $('#gratis').addClass('d-none')
+    }
+
+    $('#botaocheckout').addClass('disabled')
+    $('#simpleCart_grandTotal').addClass('invisible')
+    $('#sedexinput').prop('checked', false); 
+    $('#pacinput').prop('checked', false); 
+
+    $('#divFrete').removeClass('border border-secondary')
+
+    let formSerialized = $('#formDestino').serialize();
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'calcular' %}",
+      data: { 'valor': formSerialized },
+      success: function (response) {
+
+        $('#loaderfrete').addClass('d-none')
+        $('#valorFreteSedex').html("<strong>Sedex</strong> - Valor de frete: R$ " + response.valor + " - " + response.prazo + " dias úteis")
+        $('#valorFretePac').html("<strong>Pac</strong> - Valor de frete: R$ " + response.valor2 + " - " + response.prazo2 + " dias úteis")
+        $('#valorFreteGratis').html("<strong>Grátis</strong> - Valor de frete: R$ 0,00 - "+ response.prazo2 + " dias úteis")
+        $('#vfgratis').html(0)
+        $('#vfsedex').html(response.valor)
+        $('#vfpac').html(response.valor2)
+        $('#divFrete').addClass('border border-secondary')
+        $('#divpaifrete').removeClass('d-none')
+        
+        
+
+      },
+      error: function (response) {
+        $('#loaderfrete').removeClass('d-none')
+      }
+    })
+
+    if (simpleCart.quantity() == 0){
+    $('#checkoutdiv').addClass('d-none')
+    
+   }
+  });
+
+  function calcularfretecad(cep) {
+
+    $('#loaderfrete').removeClass('d-none')
+    localStorage.setItem('shipping', 0)
+    var s = simpleCart.total();
+    s = parseFloat(s, 10)
+    if(s>1500){
+      $('#gratis').removeClass('d-none')
+    }else if(s<1500){
+      $('#gratis').addClass('d-none')
+    }
+
+    
+    $('#botaocheckout').addClass('disabled')
+    $('#simpleCart_grandTotal').addClass('invisible')
+    $('#sedexinput').prop('checked', false); 
+    $('#pacinput').prop('checked', false); 
+
+    $('#divFrete').removeClass('border border-secondary')
+
+    var texto = 'sCepDestino=' + cep
+    
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'calcular' %}",
+      data: { 'valor': texto },
+      
+      success: function (response) {
+        $('#loaderfrete').addClass('d-none')
+        $('#valorFreteSedex').html("<strong>Sedex</strong> - Valor de frete: R$ " + response.valor + " - " + response.prazo + " dias úteis")
+        $('#valorFretePac').html("<strong>Pac</strong> - Valor de frete: R$ " + response.valor2 + " - " + response.prazo2 + " dias úteis")
+        $('#valorFreteGratis').html("<strong>Grátis</strong> - Valor de frete: R$ 0,00 - "+ response.prazo2 + " dias úteis")
+        $('#vfgratis').html(0)
+        $('#vfsedex').html(response.valor)
+        $('#vfpac').html(response.valor2)
+        $('#divFrete').addClass('border border-secondary')
+        $('#divpaifrete').removeClass('d-none')
+       
+
+      },
+      error: function (response) {
+        $('#loaderfrete').addClass('d-none')
+      }
+    })
+    
+    if (simpleCart.quantity() == 0){
+    $('#checkoutdiv').addClass('d-none')
+    
+   }
+  };
+
+  $('#sedexinput').click(function () {
+
+  var va = $('#vfsedex').text();
+  var s = simpleCart.total();
+  var q = simpleCart.quantity();
+  
+  va = va. replace(',','.')
+  va = parseFloat(va, 10)
+  s = parseFloat(s, 10)
+  q = parseInt(q)
+
+
+        
+  localStorage.setItem('shipping', va); 
+  localStorage.setItem('fte', '1')
+  
+  simpleCart.update();
+  $('#botaocheckout').removeClass('disabled')
+  $('#simpleCart_grandTotal').removeClass('invisible')
+
+
+
+  });
+
+  $('#pacinput').click(function () {
+
+    var va = $('#vfpac').text();
+    var s = simpleCart.total();
+    var q = simpleCart.quantity();
+  
+    va = va. replace(',','.')
+    va = parseFloat(va, 10)
+    s = parseFloat(s, 10)
+    q = parseInt(q)
+
+
+     
+  localStorage.setItem('shipping', va); 
+  localStorage.setItem('fte', '2')
+
+  
+  simpleCart.update();
+  $('#botaocheckout').removeClass('disabled')
+  $('#simpleCart_grandTotal').removeClass('invisible')
+
+  });
+
+  $('#gratisinput').click(function () {
+
+var va = $('#vfgratis').text();
+var s = simpleCart.total();
+var q = simpleCart.quantity();
+
+va = va. replace(',','.')
+va = parseFloat(va, 10)
+s = parseFloat(s, 10)
+q = parseInt(q)
+
+localStorage.setItem('fte', '3')    
+localStorage.setItem('shipping', va); 
+
+simpleCart.update();
+
+$('#botaocheckout').removeClass('disabled')
+$('#simpleCart_grandTotal').removeClass('invisible')
+
+});
+
+  function resetar(){
+   $('#divpaifrete').addClass('d-none')
+   $('#simpleCart_grandTotal').addClass('invisible')
+   $('input[name="enderecoescolhido"]').prop('checked', false); 
+      
+  }
+
+  $(document).ready(function(){
+  localStorage.setItem('shipping', 0)
+  localStorage.setItem('idend', 0)
+  localStorage.setItem('fte', 0)
+  var verificar = localStorage.getItem('simpleCart_items')
+  
+  if (verificar == null || verificar == '{}'){
+    $('#checkoutdiv').addClass('d-none')
+    $('#enddiv').addClass('d-none')
+    $('#textocarrinho').removeClass('d-none')
+    $('#conteudocarrinho').addClass('d-none')
+    
+  }
+  
+ });
+
+ function adcstorage(value){
+  localStorage.setItem('idend', value)
+}
+
+
+
+</script>
+<!-- Funcao de consultar frete e prazo correios  -->
+
+<script>
+
+  function limpa_formulário_cep() {
+    //Limpa valores do formulário de cep.
+
+    document.getElementById('cidade').value = ("");
+
+
+  }
+
+  function meu_callback(conteudo) {
+    if (!("erro" in conteudo)) {
+      //Atualiza os campos com os valores.
+
+
+      document.getElementById('cidade').value = (conteudo.localidade);
+
+
+    } //end if.
+    else {
+      //CEP não Encontrado.
+      limpa_formulário_cep();
+      alert("CEP não encontrado.");
+    }
+  }
+
+  function pesquisacep(valor) {
+
+    //Nova variável "cep" somente com dígitos.
+    var cep = valor.replace(/\D/g, '');
+
+    //Verifica se campo cep possui valor informado.
+    if (cep != "") {
+
+      //Expressão regular para validar o CEP.
+      var validacep = /^[0-9]{8}$/;
+
+      //Valida o formato do CEP.
+      if (validacep.test(cep)) {
+
+        //Preenche os campos com "..." enquanto consulta webservice.
+
+
+        document.getElementById('cidade').value = "...";
+
+
+
+        //Cria um elemento javascript.
+        var script = document.createElement('script');
+
+        //Sincroniza com o callback.
+        script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+        //Insere script no documento e carrega o conteúdo.
+        document.body.appendChild(script);
+
+      } //end if.
+      else {
+        //cep é inválido.
+        limpa_formulário_cep();
+        alert("Formato de CEP inválido.");
+      }
+    } //end if.
+    else {
+      //cep sem valor, limpa formulário.
+      limpa_formulário_cep();
+    }
+  };
+
+</script>
+
+
+
+{% endblock script %}

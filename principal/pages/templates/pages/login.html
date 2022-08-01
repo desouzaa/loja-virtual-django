@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %} Login - Bulldog  {% endblock %}
+
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+
+{% block content %}
+</div>
+<!--contact-->
+
+
+	<main >
+	  
+
+	<div class="form-signin text-center d-flex justify-content-center mb-5 mt-5 p-4">
+		<form novalidate class="needs-validation" id="form_login" method="POST" action="/logarCliente/">{% csrf_token %}
+		<input type="hidden" name="next" value="{{request.GET.next}}" />
+		  <h3>Já sou Cliente</h3>
+		  <p>Se você já tem uma conta Bulldog, faça o login abaixo.</p>
+		  
+		  <div class="form-floating mb-3">
+			<input type="email" class="form-control" id="email" name="email" required placeholder="nome@exemplo.com">
+			<label for="floatingInput">Email*</label>
+			
+			  <div class="invalid-feedback">
+				Por favor, digite um email válido
+			  </div>
+		  </div>
+		  <div class="form-floating">
+			<input type="password" class="form-control" id="senha" name="senha"
+			 placeholder="Senha" required>
+			<label for="floatingPassword">Senha*</label>
+			
+			  <div class="invalid-feedback">
+				Por favor, digite a senha
+			  </div>
+		  </div>
+	  
+		  <div class="checkbox mt-3 mb-3">
+			<label>
+			  <a class="texte-center text-dark " href="{% url 'resetPassword1' %}">Esqueceu a senha?</a>
+			  
+			</label>
+		  </div>
+		  <button class="w-100 btn btn-lg btn-dark" type="submit">Login</button>
+		{% if msg is not None %}
+		  <div class="alert alert-danger mt-3">{{msg}}</div>
+		  {% endif %}
+		  
+		</form>
+		
+
+	  </div>	
+
+
+
+	  <div class="form-signin text-center d-flex justify-content-center mb-5">
+		<form id="form_login" action="{% url 'account' %}">
+		  
+		  <h3>Novo Cliente? </h3>
+		  <br>
+		  <button class="w-100 btn btn-lg btn-dark" type="submit">Criar uma conta</button>
+		  		  
+		</form>
+
+	  </div>	
+
+
+	
+	  
+	</main>
+
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock script %}

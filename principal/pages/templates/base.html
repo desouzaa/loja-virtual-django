@@ -1,0 +1,549 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<!-- Head -->
+
+<head>
+  <!-- Titulo -->
+  <title>{% block title %}{% endblock %}</title>
+  <!-- fim Titulo -->
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'images/favlogo.ico' %}">
+  <!-- fim Favicon -->
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="                                    " />
+
+  <!-- CSS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link href="{% static 'css/estilo.css'%}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- fim CSS -->
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    
+    
+  </style>
+</head>
+<!-- Fim do Head -->
+
+<!-- Inicio Body -->
+
+<body>
+
+  <!-- Inicio do Header -->
+  <header style="background-color: black;" class="p-2 text-white border-0  mb-0">
+
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-start">
+        <a href="{% url 'index'%}" class="navbar-brand text-white">&nbspBULLDOG</a>
+
+        <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mt-2">
+
+          <nav class="navbar-dark navbar-expand-lg text-white">
+
+            <div class="container-fluid">
+              <button class="navbar-toggler mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#navb"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse justify-content-md-center" id="navb">
+                <ul class="navbar-nav">
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link text-white " href="#" data-bs-toggle="dropdown" aria-expanded="false">Anéis</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown08">
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='allaneis' %}">Todos os
+                          modelos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='aneis comuns'%}">Anéis
+                          comuns</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='aneis com pedra'%}">Anéis
+                          com pedras</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='dedeiras'%}">Dedeiras</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='solitarios'%}">Anéis
+                          Solitários</a></li>
+
+                    </ul>
+                  </li>
+                
+                  <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" id="dropdown08" data-bs-toggle="dropdown"
+                      aria-expanded="false">Colares</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown08">
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='allcolares'%}">Todos os
+                          modelos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='colares masculinos'%}">Colares
+                          masculinos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='colares femininos'%}">Colares
+                          femininos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='escapularios'%}">Escapulários
+                          de
+                          prata</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='gargantilha'%}">Gargantilha
+                          de
+                          prata</a></li>
+
+
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" id="dropdown08" data-bs-toggle="dropdown"
+                      aria-expanded="false">Pingentes</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown08">
+
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='allpingentes'%}">Todos os
+                          modelos</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='pingentes masculinos'%}">Pingentes
+                          masculinos</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='pingentes femininos'%}">Pingentes
+                          femininos</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" id="dropdown08" data-bs-toggle="dropdown"
+                      aria-expanded="false">Pulseiras</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown08">
+
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='allpulseiras'%}">Todos os
+                          modelos</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='pulseiras de prata'%}">Pulseiras
+                          de prata</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='braceletes de prata'%}">Braceletes
+                          de prata</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='pulseiras masculinas'%}">Pulseiras
+                          masculinas</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='pulseiras femininas'%}">Pulseiras
+                          femininas</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='allberloques'%}">Berloques</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='berloques de aco'%}">Berloque
+                          de aço</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='berloques de prata'%}">Berloque
+                          de prata</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='pingentes berloque'%}">Pingentes
+                          para berloque</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" id="dropdown08" data-bs-toggle="dropdown"
+                      aria-expanded="false">Brincos</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown08">
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='allbrincos'%}">Todos os
+                          modelos</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='argola'%}">Argola</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='brinco pequeno'%}">Pequenos</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='segundo furo'%}">Segundo
+                          furo</a></li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='brinco com pedra'%}">Com
+                          pedras</a></li>
+                      <li><a class="dropdown-item"
+                          href="{% url 'products' categoria='brinco masculino'%}">Masculinos</a>
+                      </li>
+                      <li><a class="dropdown-item" href="{% url 'products' categoria='alargadores'%}">Alargadores</a>
+                      </li>
+
+
+                    </ul>
+
+                  </li>
+                  <a class="nav-link text-white" href="{% url 'products' categoria='aneis'%}">OUTLET</a>
+
+
+                </ul>
+              </div>
+
+            </div>
+
+          </nav>
+          <form method="get" action="/buscarProduto/" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="search" class="form-control form-control-dark " placeholder="Buscar..." aria-label="Search"
+              name="search" id="search">
+          </form>
+
+          {% if user.is_authenticated %}
+
+          <li class="nav-item dropdown ">
+
+            <a class="card2 nav-link text-white dropdown-toggle me-1" href="#"
+              data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-fill text-white"> </i>
+              {{user.first_name}} </a>
+
+            <ul class="dropdown-menu" aria-labelledby="dropdown08">
+              <li><a class="dropdown-item" href="{% url 'meusdados' %}">Minha conta</a></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Sair
+                </a></li>
+            </ul>
+
+          </li>
+
+          {% else %}
+
+          <a class="card2 nav-link text-white me-1" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Fazer Login" href="{% url 'login' %}">Login</a>
+
+
+          {% endif %}
+          <a href="{% url 'carrinho'%}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Carrinho de compras" class="card2 me-1 nav-link text-white "><i class="bi bi-bag">  </i>        
+            (<span id="simpleCart_quantity" class="simpleCart_quantity"> 0 </span>)
+          </a>
+  
+          <a href="#" class="card2 simpleCart_empty nav-link text-white "><i
+              data-bs-toggle="tooltip" data-bs-placement="bottom" title="Esvaziar carrinho"
+              class="bi bi-trash-fill"></i></a>
+
+
+        </ul>
+        
+        
+        
+       
+
+
+
+
+
+
+
+
+      </div>
+    </div>
+    
+  </header>
+  <!-- Fim do Header -->
+  <!-- início do preloader -->
+  <div class="" id="preloader">
+    <div class="inner">
+             
+       <img src="{% static 'images/loader.gif'%}" alt="loader">
+    </div>
+</div>
+
+<!-- fim do preloader --> 
+  
+  {% block content %} {% endblock %}
+  
+
+
+  <a href="https://api.whatsapp.com/send?phone=+5511932245435&text=Hello%21%20." class="card2 floating " target="_blank"><i class="fa fa-whatsapp float-button"></i>
+  </a>
+
+  <p class="text-center card2 mt-5 mb-5"><a href="#"><button style="background-color: black;" class="shadow text-white border border-secondary rounded">Subir para o
+        topo</button></a></p>
+  <!-- Inicio do footer -->
+
+  
+
+
+  <footer style="background-color: black;" class="text-center text-white border-bottom border-top border-secondary">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+     
+
+
+      <section class="mb-5 mt-5 ">
+        
+        <div id="newslet" class="">
+          <h6 class="mb-2 text-white">Entre para nossa newsletter, receba novidades imperdíveis e cupons de desconto!</h6>
+        <div class="form-group bg-white border rounded px-2 py-2 mb-2">
+          <form id="formnews" action="." method="POST">
+            
+          <div class="row">
+              <div class="col"> 
+                <input type="email" name="email" class="form-control pl-3 shadow-none bg-transparent border-0" placeholder="Digite seu email"> 
+              </div>
+              <div class="col-auto"> 
+                <button type="button" id="newsletter" class="btn btn-block btn-dark">Enviar</button> 
+              </div>
+          </div>
+        </form>
+      </div>
+        </div>
+        <div class="">
+          <img id="loaderfrete" style='max-width: 10%;' class='mx-auto mt-3 mb-3 d-none' src='../static/images/Spinner-1s-200px.gif'> 
+
+          <h6 id="msgnews" class="mb-2 text-white d-none">Email cadastrado!</h6>
+        </div>
+     
+
+
+      </section>
+
+
+      <section class="mb-5 mt-3">
+        <!-- Facebook -->
+
+        <a target="_blank" class=" btn-floating m-2 btn-lg " href="https://www.facebook.com/" role="button">
+          <i class="bi bi-facebook"></i></a>
+
+        <!-- Google -->
+        <a target="_blank" class=" btn-floating m-2 btn-lg " href="https://www.youtube.com/" role="button">
+          <i class="bi bi-youtube"></i></a>
+
+        <!-- Instagram -->
+        <a target="_blank" class=" btn-floating m-2 btn-lg" href="https://www.instagram.com/?hl=pt-br" role="button">
+          <i class="bi bi-instagram"></i></a>
+
+
+      </section>
+
+      <div class="row mt-4 mb-3">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Bulldog</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="{% url 'contact' %}" class="text-white sma">Sobre a
+                  empresa</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Serviços</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="{% url 'sac' %}" class="text-white sma">SAC</a>
+            </li>
+            <li>
+              <a href="{% url 'faq' %}" class="text-white sma">Dúvidas
+                  frequentes</a>
+            </li>
+            <li>
+              <a href="{% url 'contact' %}" class="text-white sma">Contato</a>
+            </li>
+
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Políticas</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!" class="text-white sma">Políticas de troca, devolução
+                  e garantia</a>
+            </li>
+            <li>
+              <a href="" class="text-white sma">Políticas de envio</a>
+            </li>
+            <li>
+              <a href="https://www.procon.df.gov.br/wp-content/uploads/2019/08/Codigo-do-consumidor-FINAL.pdf" class="text-white sma" target="_blank">Código de defesa do consumidor</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Legal</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!" class="text-white sma">Privacidade</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white sma">Termos e
+                  condições</a>
+            </li>
+
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+
+      <div class="text-center p-4">
+        © 2021 Bulldog :
+        <a style="text-decoration: none;" class="text-white" href="">Desenvolvido por <strong><a target="_blank"
+              href="https://www.linkedin.com/in/rafael-de-souza-7a96a41a6">Rafael de
+              Souza</a></strong></a>
+      </div>
+
+    </div>
+
+
+  </footer>
+  <!-- Fim do footer -->
+
+  <!-- Scripts -->
+  <script>
+    //<![CDATA[
+    $(window).on('load', function () {
+      $('#preloader .inner').fadeOut();
+      $('#preloader').delay(10).fadeOut('slow');
+      $('body').delay(10).css({ 'overflow': 'visible' });
+    })
+      //]]>
+
+
+
+    $('#newsletter').click(function() {
+    $('#newslet').addClass('d-none')
+    $('#loaderfrete').removeClass('d-none')
+    let formSerialized = $('#formnews').serialize();
+
+    $.ajax({
+      type: 'POST',
+      url: "{% url 'newsletter' %}",
+      data: { 'valor': formSerialized },
+      success: function (response) {
+      $('#loaderfrete').addClass('d-none')
+      $('#msgnews').removeClass('d-none')
+        
+      },
+      error: function (response) {
+      $('#loaderfrete').addClass('d-none')
+      $('#msgnews').removeClass('d-none')  
+      $('#msgnews').html('Algum erro ocorreu, verifique se o email já está cadastrado!')
+
+
+      }
+    })
+
+    });
+
+    
+    </script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="{% static 'js/simpleCart.js'%}" type="text/javascript"></script>
+  
+
+<!-- INICIO CONSETIMENTO Cookie  -->
+<script type="text/javascript" src="//www.termsfeed.com/public/cookie-consent/4.0.0/cookie-consent.js" charset="UTF-8"></script>
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({"notice_banner_type":"simple","consent_type":"implied","palette":"dark","language":"pt","page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"website_name":"Bulldog das pratas"});
+});
+</script>
+<noscript>Cookie Consent by <a href="https://www.termsfeed.com/privacy-policy-generator/" rel="nofollow noopener">TermsFeed Generator</a></noscript>
+<!-- FIM CONSETIMENTO Cookie  -->
+
+  <!-- Script Cart -->
+  <script type="text/javascript">
+   simpleCart({
+    cartColumns: [
+        {view:'link' , label: false , attr: 'link' , text: '' },
+        {view: "image", attr:'thumb', label:false},
+        { attr: "name" , label:false } ,
+        { attr: "variacao" , label:false } ,
+        { attr: "frete" , label:false } ,
+        { attr: "prazo" , label:false } ,
+        { attr: "idvar" , label:false } ,
+        { attr: "idprod" , label:false } ,
+        { attr: "price" , label:"Valor Unitário", view: 'currency' } ,
+        { view: "decrement" , label: false , text: "-" } ,
+        { attr: "quantity" , label: "Qtd" } ,
+        { view: "increment" , label: false , text: "+" } ,
+        { attr: "total" , label: "Valor total", view: 'currency' } ,
+        { view: "remove" , text: "" , label: false },
+        
+        
+          ]
+});
+
+    simpleCart.currency({
+      code: "BRL",
+      name: "Real",
+      symbol: "R$ ",
+      delimiter: "",
+      decimal: ",",
+      after: false,
+      accuracy: 2
+    });
+
+    simpleCart({
+    checkout: { 
+        type: "SendForm" , 
+        method: "POST",
+        url: "{% url 'checkout'%}",
+        
+    },
+
+    cartStyle: 'table'
+});
+
+   
+
+  </script>
+  <!--Fim Script Cart -->
+
+  <script>// JS PARA VALIDAR CAMPOS OBRIGATORIOS
+    (function () {
+      'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
+  </script>
+
+  <script>//JS PARA TOOLTIP
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script>
+
+{% block script %}
+{% endblock script %}
+  <!-- Scripts -->
+
+</body>
+
+</html>

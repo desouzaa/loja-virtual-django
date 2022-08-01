@@ -1,0 +1,441 @@
+
+{% extends 'base.html' %}
+{% block title %} Pedido - Bulldog {% endblock %}
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+{% block content %}
+
+<div class="container-fluid ">
+    <div class="row">
+      <nav id="sidebarMenu" class="shadow col-md-2 col-lg-2 d-md-block bg-light sidebar  mt-5 mb-1">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+                <span data-feather="home"></span>
+                Minha conta
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+                <span data-feather="Alterar -senha"></span>
+                Alterar minha senha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+                <span data-feather="Meus-dados"></span>
+                Meus dados
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+                <span data-feather="Meus-pedidos"></span>
+                Meus pedidos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Solicitações"></span>
+                Solicitações
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Rastrear-pedido"></span>
+                Rastrear pedido
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+                  <span data-feather="Lista-de-desejos"></span>
+                  Lista de desejos
+                </a>
+              </li>
+          </ul>
+
+         
+        </div>
+      </nav>
+  
+      <main class="col-md-10 ms-sm-10 col-lg-10 px-md-4 mt-5 mb-5">
+       
+  
+        <div class="">
+          <div class="row g-5">		
+            <div class="bg-light col-md-10 col-lg-10 col-sm-10  mx-auto shadow">
+                
+                
+                <h3 class="text-center mt-5 mb-4 ">Pedido n° {{pedido.numero_pedido}}</h3>
+                <div class="border mb-5 pt-3">
+                
+                
+                <div class="d-flex px-3 justify-content-between w-100">
+                  <h5 class=""><strong>Status do pedido: </strong> {{pedido.status_pedido}}</h5>
+                </div>
+            
+                <div class="d-flex px-3 pb-3 justify-content-between w-100 ">
+                    <h5 class=""><strong>Pagamento do pedido: </strong>
+                      {% if pedido.paid == True %} 
+                      <i class="bi bi-check-circle-fill"> </i> Confirmado
+                      {% else %}
+                      <i class="bi bi-exclamation-circle-fill text-warning"> </i> Pagamento pendente ou recusado
+                      {% endif %}
+
+                    </h5>
+                    
+                </div>
+            </div>
+
+                      
+
+            <h5 class=" mt-4 mb-4 p-2 text-center fw-bold">Pagamentos</h5>
+            
+            
+            {% for pag in pags %}
+            
+            
+            <div class="border mb-5 px-3 pb-3 pt-3">
+
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Id do pagamento: </strong>  {{pag.id}}</h6>
+                </div>
+                
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Tipo do pagamento: </strong>
+                        {% if pag.payment_method_id == 'bolbradesco'%}
+                        Boleto 
+                        {% elif pag.payment_method_id == 'pix'%}
+                        Pix 
+                        {% elif pag.payment_method_id == 'pec'%}
+                        Pagamento na lotérica sem Boleto 
+                        {% else %}
+                        {{pag.payment_method_id}} 
+                        {% endif %} </h6>
+                    
+                </div>
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Parcelas: </strong>{{pag.installments}} </h6>
+                    
+                </div>
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong> Valor total: </strong>R$ {{pag.transaction_amount}} </h6> 
+                  </div>
+                
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Email do pagador: </strong>{{pag.email}} <strong>Número de documento:</strong> {{pag.doc_number}}</h6>
+                </div>
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Status: </strong>{% if pag.mercado_pago_status == 'rejected' %} <strong class="text-danger"> {{pag.mercado_pago_status}} </strong> {% else %} {{pag.mercado_pago_status}} {% endif %}</h6>
+                </div>
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Datalhamento:</strong>  {{pag.mercado_pago_status_detail}}</h6>  
+                </div>
+                {% if pag.payment_method_id == 'bolbradesco'%}
+
+
+                <div class="mt-3 mb-3"><a target="_blank" href="{{pag.link}}"><h6 class="btn btn-white rounded shadow border-secondary"><i class="bi bi-receipt "> </i> Ver boleto</h6></a></div>
+
+                {% elif pag.payment_method_id == 'pix'%}
+
+
+                <div class="mt-3 mb-3">
+                  <button data-bs-toggle="modal" data-bs-target="#staticBackdrop3" type="button" class="btn btn-white rounded shadow border-secondary me-5"><i class="bi bi-qr-code-scan"> </i>Ver QR code e link de pagamento</button>
+                </div> 
+
+                <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Efetuar pagamento do pedido</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      
+                        <h6 class="mt-3">Scaneie esse código no seu aplicativo do banco para efetuar o pagamento via pix</h6>
+                        <div class="mt-0 mb-5 mx-auto">
+
+                        <div class="mx-auto align-items-center text-center"><img id="qr" style="width: 50%;" class="image-fluid" src="{{pag.img}}"/></div>
+                        
+                        <div class="input-group mt-4">
+                        <label class="fw-bold input-group-text" for="copiar">Código de pagamento</label>
+                        <input class="form-control" type="text" id="copiar"  value={{pag.qr}}/> 
+                       </div>
+
+                        </div>
+                          
+  
+                      </div>
+                      <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+
+
+                {% elif pag.payment_method_id == 'pec'%}
+
+                <div class="mt-3 mb-3"><a target="_blank" href="{{pag.link}}"><h6 class="btn btn-white rounded shadow border-secondary"><i class="bi bi-receipt "> </i> Ver ticket para pagamento </h6></a></div>
+                                
+                {% endif %}
+
+                                                
+            </div>
+            {% empty %}
+            <div class="border mb-5 px-3 pb-3 pt-3">
+                <div class="d-flex justify-content-center w-100 mb-5 mt-5">
+                    <div class="w-50  text-center alert alert-danger">Nenhum pagamento efetuado ainda!</div>
+                </div>
+                  </div>
+                  <div class="mb-5 d-flex justify-content-center w-100">
+                  <button data-bs-toggle="modal" data-bs-target="#staticBackdrop2" type="button" class="btn btn-white rounded shadow border-secondary "><i class="bi bi-wallet text-success"> </i> Efetuar pagamento</button>
+                </div>
+            {% endfor %} 
+        <div class="mb-5 d-flex justify-content-center w-100">
+            
+            
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" type="button" class="btn btn-white rounded shadow border-secondary me-5"><i class="bi bi-question-octagon-fill text-warning"> </i> O que signfica esse status e detalhamento?</button>
+
+            {% if pedido.status_pedido.id_status == 12 %}
+            
+            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop2" type="button" class="btn btn-white rounded shadow border-secondary me-5"><i class="bi bi-wallet text-success"> </i> Efetuar novo pagamento</button>
+            
+            {% endif %}
+                            
+            <a href="{% url 'rastrearentrega' pedido.numero_pedido%}"><button type="button" class="btn btn-white rounded shadow border-secondary"><i class="bi bi-truck text-dark"> </i> Rastrear entrega</button></a>
+
+                            
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"><i class="bi bi-question-octagon-fill text-warning"> </i> O que Signfica esse status e detalhamento?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body table-responsive">
+                    
+
+                        <table class="table table-striped">
+                            
+                            <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Status</th>
+                                  <th scope="col">Detalhamento</th>
+                                  <th scope="col">Significado</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <th scope="row">1</th>
+                                  <td>approved</td>
+                                  <td>accredited</td>
+                                  <td>Pronto, seu pagamento foi aprovado! No resumo, você verá a cobrança do valor como statement_descriptor.</td>
+                                </tr>
+                                <tr>
+                                  <th scope="row">2</th>
+                                  <td>in_process</td>
+                                  <td>pending_contingency</td>
+                                  <td>Estamos processando o pagamento.
+
+                                    Não se preocupe, em menos de 2 dias úteis informaremos por e-mail se foi creditado.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>in_process</td>
+                                    <td>pending_review_manual</td>
+                                    <td>Estamos processando seu pagamento.
+
+                                        Não se preocupe, em menos de 2 dias úteis informaremos por e-mail se foi creditado ou se necessitamos de mais informação.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">4</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_bad_filled_card_number</td>
+                                    <td>Revise o número do cartão.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">5</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_bad_filled_date</td>
+                                    <td>Revise a data de vencimento.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">6</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_bad_filled_other</td>
+                                    <td>Revise os dados.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">7</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_bad_filled_security_code</td>
+                                    <td>Revise o código de segurança do cartão.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">8</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_blacklist</td>
+                                    <td>Não pudemos processar seu pagamento.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">9</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_call_for_authorize</td>
+                                    <td>NVocê deve autorizar ao banco o pagamento do valor ao Mercado Pago.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">10</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_card_disabled</td>
+                                    <td>Ligue para seu banco para ativar seu cartão. O telefone está no verso do seu cartão.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">11</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_card_error</td>
+                                    <td>Não conseguimos processar seu pagamento.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">12</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_duplicated_payment</td>
+                                    <td>Você já efetuou um pagamento com esse valor. Caso precise pagar novamente, utilize outro cartão ou outra forma de pagamento.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">13</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_high_risk</td>
+                                    <td>Seu pagamento foi recusado.
+
+                                        Escolha outra forma de pagamento. Recomendamos meios de pagamento em dinheiro.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">14</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_insufficient_amount</td>
+                                    <td>O saldo é insuficiente.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">15</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_invalid_installments</td>
+                                    <td>O banco não processa pagamentos em parcelas</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">16</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_max_attempts</td>
+                                    <td>Você atingiu o limite de tentativas permitido. Escolha outro cartão ou outra forma de pagamento.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">17</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_other_reason</td>
+                                    <td>payment_method_id não processa o pagamento.</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">18</th>
+                                    <td>rejected</td>
+                                    <td>cc_rejected_card_type_not_allowed</td>
+                                    <td>O pagamento foi rejeitado porque o usuário não tem a função crédito habilitada em seu cartão multiplo (débito e crédito).</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row">19</th>
+                                    <td>pending</td>
+                                    <td>pending_waiting_transfer</td>
+                                    <td>Aguardando o pagamento do boleto, pix ou pec</td>
+                                  </tr>
+
+                            </tbody>
+                          </table>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel"> Efetuar pagamento do pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <a href="{% url 'pagarpedido' id=pedido.numero_pedido method=1 %}"><button  type="button" class="btn btn-white rounded shadow border-secondary me-2 mb-3"><i class="bi bi-credit-card text-success"> </i> Pagar com cartão de crédito</button></a>
+                        <br>
+                        <a href="{% url 'pagarpedido' id=pedido.numero_pedido method=2 %}"><button  type="button" class="btn btn-white rounded shadow border-secondary "><i class="bi bi-cash-coin text-success"> </i> Pagar com pix, lotérica ou boleto</button></a>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+                <h5 class="mb-4 mt-4 p-2 text-center fw-bold">Items do pedido</h5>
+                <div class="border mb-5 pt-3">
+                
+                {% for item in items %}
+                <div class="d-flex px-3 justify-content-between w-100">
+                  <h6 class="fw-lighter"><strong>Produto -</strong> {{item.id_produto.id_produto.nome}} - {{item.id_produto.nome}}</h6>
+                  <h6 class="fw-lighter">{{item.qtd}}und x R${{item.preco}}</h6>
+                </div>
+                {% endfor %}
+                <div class="d-flex px-3 pb-3 justify-content-between w-100 mt-4">
+                    <h6 class="fw-bold fs-6">Valor total dos items</h6>
+                    <h6 class="fw-bold fs-6">R$ {{valortotal}}</h6>
+                </div>
+            </div>
+                
+                <h5 class=" mt-4 mb-4 p-2 text-center fw-bold">Envio</h5>
+                <div class="border mb-5 px-3 pt-3 pb-3">
+                <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Endereço - </strong> {{pedido.id_endereco.rua}}, {{pedido.id_endereco.numero}}, {{pedido.id_endereco.bairro}}, {{pedido.id_endereco.cidade}}, {{pedido.id_endereco.estado}}, {{pedido.id_endereco.cep}}</h6>
+                    
+              </div>
+              <div class="d-flex justify-content-between w-100">
+                    <h6 class="fw-lighter fs-6"><strong>Opção de envio - </strong>
+                    {% if pedido.opcaofrete == '1' %}
+                    Sedex
+                    {% elif pedido.opcaofrete == '2' %}
+                    Pac  
+                    {% elif pedido.opcaofrete == '3' %} 
+                    Frete Grátis 
+                    {% endif %}
+                    </h6>
+                        
+                    </div>
+                    <div class="d-flex justify-content-between w-100">
+                        <h6 class="fw-lighter fs-6"><strong>Valor do envio -</strong> R$ {{pedido.frete}}</h6>  
+
+                    </div>
+                    
+                    <div class="d-flex mt-4 justify-content-between w-100">
+                        <h6 class="fw-bold fs-6">Valor total com frete</h6>
+                        <h6 class="fw-bold fs-6">R$ {{valorcomfrete}}</h6>
+                  </div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+</div>
+                
+  {% endblock %}
+  
+    
+    

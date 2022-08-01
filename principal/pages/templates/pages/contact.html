@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %} Contato - Bulldog {% endblock %}
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+{% block content %}
+
+<main>
+
+
+	<div class="container mb-3 mt-3 ">
+
+		<div class="row g-8">
+			<div class="col-md-8 col-lg-8 mx-auto text-center">
+
+				<h2 class="mb-5 mt-3">CONTATO</h2>
+
+				<div class="google-map mt-5 mb-5"> 
+
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58482.93783160075!2d-47.05515144159316!3d-23.633594486236184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf09d2a5241d67%3A0x7fedb02d5a5b238f!2sVargem%20Grande%20Paulista%2C%20SP!5e0!3m2!1spt-BR!2sbr!4v1636420858083!5m2!1spt-BR!2sbr"></iframe>
+
+				</div>
+
+				<div>
+					<p>Bulldog, uma empresa fundada em 2021 por dois irmãos com alvo na satisfação dos nossos clientes.
+					</p>
+					<address>
+						<p>Bulldog </p>
+						<p>Vargem Grande Paulista</p>
+						<p>...</p>
+						<p>Telephone : +1 800 603 6035</p>
+						<p>FAX : +1 800 889 9898</p>
+						<p>E-mail : <a href="mailto:example@mail.com">example@mail.com</a></p>
+					</address>
+				</div>
+
+				<div >
+
+					<form>
+						<h5>name</h5>
+						<input type="text">
+						<h5>emailaddress</h5>
+						<input type="text">
+						<h5>message</h5>
+						<textarea></textarea>
+						<input type="submit" value="send">
+					</form>
+
+				</div>
+
+
+
+			</div>
+
+		</div>
+
+
+
+
+
+	</div>
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+<!-- registration -->
+
+
+
+{% endblock %}

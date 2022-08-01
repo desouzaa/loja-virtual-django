@@ -1,0 +1,111 @@
+{
+    "status": 200,
+    "response": {
+        "acquirer_reconciliation": [],
+        "additional_info": {
+            "authentication_code": None,
+            "available_balance": None,
+            "nsu_processadora": None
+        },
+        "authorization_code": None,
+        "binary_mode": False,
+        "brand_id": None,
+        "call_for_authorize_id": None,
+        "captured": True,
+        "card": {
+            "cardholder": {
+                "identification": {
+                    "number": "54791576047",
+                    "type": "CPF"
+                },
+                "name": "CONT"
+            },
+            "date_created": "2021-12-15T14:37:36.000-04:00",
+            "date_last_updated": "2021-12-15T14:37:36.000-04:00",
+            "expiration_month": 11,
+            "expiration_year": 2025,
+            "first_six_digits": "503143",
+            "id": None,
+            "last_four_digits": "6351"
+        },
+        "charges_details": [],
+        "collector_id": 172898421,
+        "corporation_id": None,
+        "counter_currency": None,
+        "coupon_amount": 0,
+        "currency_id": "BRL",
+        "date_approved": None,
+        "date_created": "2021-12-15T14:37:36.091-04:00",
+        "date_last_updated": "2021-12-15T14:37:36.201-04:00",
+        "date_of_expiration": None,
+        "deduction_schema": None,
+        "description": "2 x (12 (Anel Viking Odin)-Prata - 12cm)",
+        "differential_pricing_id": None,
+        "external_reference": None,
+        "fee_details": [],
+        "id": 1244653608,
+        "installments": 4,
+        "integrator_id": None,
+        "issuer_id": "24",
+        "live_mode": False,
+        "marketplace_owner": None,
+        "merchant_account_id": None,
+        "merchant_number": None,
+        "metadata": {},
+        "money_release_date": None,
+        "money_release_schema": None,
+        "notification_url": None,
+        "operation_type": "regular_payment",
+        "order": {},
+        "payer": {
+            "first_name": None,
+            "last_name": None,
+            "email": "test_user_80507629@testuser.com",
+            "identification": {
+                "number": "32659430",
+                "type": "DNI"
+            },
+            "phone": {
+                "area_code": None,
+                "number": None,
+                "extension": None
+            },
+            "type": None,
+            "entity_type": None,
+            "id": "1029079596"
+        },
+        "payment_method_id": "master",
+        "payment_type_id": "credit_card",
+        "platform_id": None,
+        "point_of_interaction": {
+            "business_info": {
+                "sub_unit": "sdk",
+                "unit": "online_payments"
+            },
+            "type": "UNSPECIFIED"
+        },
+        "pos_id": None,
+        "processing_mode": "aggregator",
+        "refunds": [],
+        "shipping_amount": 0,
+        "sponsor_id": None,
+        "statement_descriptor": "GARRISON",
+        "status": "in_process",
+        "status_detail": "pending_contingency",
+        "store_id": None,
+        "taxes_amount": 0,
+        "transaction_amount": 720.6,
+        "transaction_amount_refunded": 0,
+        "transaction_details": {
+            "acquirer_reference": None,
+            "external_resource_url": None,
+            "financial_institution": None,
+            "installment_amount": 198.58,
+            "net_received_amount": 0,
+            "overpaid_amount": 0,
+            "payable_deferral_period": None,
+            "payment_method_reference_id": None,
+            "total_paid_amount": 794.32
+        }
+    }
+}

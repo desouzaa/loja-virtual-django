@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block title %} Meus pedidos - Bulldog  {% endblock %}
+
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+
+{% block content %}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class=" shadow col-md-3 col-lg-2 d-md-block bg-light sidebar mb-1 mt-5">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+                <span data-feather="home"></span>
+                Minha conta
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+                <span data-feather="Alterar -senha"></span>
+                Alterar minha senha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+                <span data-feather="Meus-dados"></span>
+                Meus dados
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+                <span data-feather="Meus-pedidos"></span>
+                Meus pedidos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Solicitações"></span>
+                Solicitações
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Rastrear-pedido"></span>
+                Rastrear pedido
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+                  <span data-feather="Lista-de-desejos"></span>
+                  Lista de desejos
+                </a>
+              </li>
+          </ul>
+
+
+          
+  
+         
+        </div>
+      </nav>
+  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+       
+  
+        <div class="">
+          
+            <div>
+                <h3 class="text-center mt-3 mb-3">Meus Pedidos</h3>
+                
+                
+
+                <ul class="list-group">
+
+                   
+                  <div class="list-group">
+                        {% for pedido in pedidos %}
+
+                        <a href="{% url 'pedido' pedido.numero_pedido %}">
+                        <div class="card shadow text-dark bg-light w-100 mb-3 border-0">
+                            <div class="card-body">
+                            <h5 class="card-title">Pedido N°: {{pedido.numero_pedido}} </h5>
+                            <p class="card-text"><strong>Data da compra: </strong> {{pedido.created}}<br>
+                              <strong>Endereço de entrega:</strong> {{pedido.id_endereco.rua}}, {{pedido.id_endereco.numero}}, {{pedido.id_endereco.cidade}}<br>
+                            <strong>Valor do pedido:</strong> R$ {{pedido.get_preco_total}}0<br>
+                            <strong>Valor do frete:</strong> R$ {{pedido.frete}}0 <br>
+                            </p>
+                            <p>
+                              <strong class="mt-2 mb-2">Status do pedido: </strong>
+                              {% if pedido.paid == True %}
+                              <i class="bi bi-check-circle-fill text-success "> </i> {{pedido.status_pedido}}
+                              {% else%}
+                              <i class="bi bi-exclamation-octagon-fill text-warning"> </i> {{pedido.status_pedido}}
+                              {% endif %}
+                            </p>
+                              
+                            </div>
+                         </div>
+                        </a>
+                         {% empty %}
+                         <div class="shadow alert alert-warning mt-3 mb-5 text-center">Nenhum pedido efetuado ainda! Confira nossos produtos abaixo<br><br>
+                         <a class="fs-5 text-dark" href="{% url 'products' categoria='all' %}">Ver produtos</a> 
+                         
+                        </div>
+                         {% endfor %}
+                  </div>
+                        
+                </ul>
+            </div>
+
+           
+            </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+<div style="height: 80px;"></div>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock script %}

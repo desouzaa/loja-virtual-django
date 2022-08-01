@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% block title %} Meus dados - Bulldog  {% endblock %}
+
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {% endblock %}
+{% block logout %} {{logout}} {% endblock %}
+
+{% block content %}
+
+
+
+<div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="shadow col-md-3 col-lg-2 d-md-block bg-light sidebar mb-1 mt-5">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link text-dark active" aria-current="page" href="{% url 'meusdados' %}">
+                <span data-feather="home"></span>
+                Minha conta
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-bs-custom-class="beautifier" class="nav-link text-dark text-dark" href="{% url 'alterarFrm'%}">
+                <span data-feather="Alterar -senha"></span>
+                Alterar minha senha
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusdados'%}">
+                <span data-feather="Meus-dados"></span>
+                Meus dados
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="{% url 'meusPedidos'%}">
+                <span data-feather="Meus-pedidos"></span>
+                Meus pedidos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Solicitações"></span>
+                Solicitações
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">
+                <span data-feather="Rastrear-pedido"></span>
+                Rastrear pedido
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="{% url 'MeusFavoritos'%}">
+                  <span data-feather="Lista-de-desejos"></span>
+                  Lista de desejos
+                </a>
+              </li>
+          </ul>
+
+
+          
+  
+         
+        </div>
+      </nav>
+  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+       
+  
+        <div class="e">
+          
+            <div>
+                <h3 class="text-center mt-3 mb-3">Dados pessoais</h3>
+                
+                
+
+                <ul class="list-group">
+
+                   
+                    <div class="list-group">
+                        {% for dados in dadosCliente %}
+
+                        <div class="card shadow text-dark bg-light w-100 border-0">
+                            <div class="card-body">
+                              <h5 class="card-title">{{dados.first_name}} {{dados.last_name}}</h5>
+                              <p class="card-text"><strong>CPF: </strong>{{dados.cpf}}<br>
+                                {% if dados.sexo == 'F'%}
+                                <strong>Sexo: </strong><input class="bg-light text-dark  border-0 rounded-pill"  type="text" readonly value="Feminino"> <br>
+                                {% elif dados.sexo == 'M'%}
+                                <strong>Sexo: </strong><input class="bg-light text-dark  border-0 rounded-pill"  type="text" readonly value="Masculino"> <br>
+                                {% else %}
+                                <strong>Sexo: </strong><input class="bg-lighttext-dark  border-0 rounded-pill"  type="text" readonly value="Não informado"> <br>
+                                {% endif %}
+                                <strong>Email: </strong><input class="w-100 bg-light text-dark  border-0 rounded-pill"  type="email" readonly value="{{dados.email}}"> <br>
+                                <strong>Data de Nascimento:  </strong><input class="bg-light text-dark  border-0 rounded-pill"  type="date" readonly value="{{dados.datanascimento}}"> 
+                            </p>
+                              
+                              <a href="{% url 'editarDados'%}" class="btn btn-dark">Editar dados pessoais</a>
+                            </div>
+                          </div>
+                         {% endfor %}
+                        
+                </ul>
+            </div>
+
+            <div>
+            <h3 class="text-center mt-3 mb-3">Endereços cadastrados</h3>
+            
+            
+
+                <ul class="list-group">
+
+                    <div class="list-group">
+                        {% for endereco in enderecos %}
+
+                        <div class="card shadow w-100 text-dark bg-light border-0">
+                            <div class="card-body">
+                              <h5 class="card-title">{{endereco.rua}}, {{endereco.numero}}</h5>
+                              <p class="card-text"><strong>CEP: </strong> {{endereco.cep}}, 
+                                {{endereco.bairro}}, {{endereco.cidade}}, {{endereco.estado}}<br>
+                                {{endereco.complemento1}} {{endereco.complemento2}}
+                                </p>
+                              
+                              <a href="{% url 'editarEndereco' endereco.id_endereco %}" class="btn btn-dark">Editar</a>
+                              <a href="{% url 'excluirEndereco' endereco.id_endereco %}" class="btn btn-dark">Excluir</a>
+                            </div>
+                          </div>
+                         
+                          <div class="d-flex justify-content-center">
+                            {% if msg2 is not None %}
+                            <div class="alert alert-danger mt-3 mb-3">{{msg2}}</div>
+                            {% endif %}
+                          </div>
+                          <div style="height: 18px;"></div>
+                         
+                        
+                        {% endfor %}
+                        <li style="background-color: black;" class=" list-group-item rounded shadow"><a class="text-light" href="{% url 'enderecos' %}">Cadastrar novo endereço</a>
+                        </li>
+                        
+                  
+                    
+                </ul>
+            </div>
+
+            <h3 class="text-center mt-3">Telefones cadastrados</h3>
+            
+                <ul class="list-group">
+
+                    <div class="list-group">
+                        {% for telefone in telefones %}
+
+
+
+                        <div class="card shadow w-100 text-dark bg-light border-0">
+                            <div class="card-body">
+                              <h5 class="card-title ">{{telefone.telefone}}</h5>
+                                <br>
+                              <a href="{% url 'editarTelefone' telefone.id_telefone %}" class="btn btn-dark">Editar</a>
+                              <a href="{% url 'excluirTelefone' telefone.id_telefone %}" class="btn btn-dark">Excluir</a>
+                            </div>
+                          </div>
+
+                          <div class="d-flex justify-content-center">
+                            {% if msg1 is not None %}
+                            <div class="alert alert-danger mt-3 mb-3" >{{msg1}}</div>
+                            {% endif %}
+                          </div>
+                          <div style="height: 18px;"></div>
+                         
+                        {% endfor %}
+
+                        <li style="background-color: black;" class="list-group-item rounded shadow"><a class="text-white" href="{% url 'telefones' %}">Cadastrar novo telefone</a>
+                        </li>
+                        
+                  
+                    
+                </ul>
+            </div>
+        </div>
+      </main>
+    </div>
+
+  </div>
+<div style="height: 80px;"></div>
+
+
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock script %}

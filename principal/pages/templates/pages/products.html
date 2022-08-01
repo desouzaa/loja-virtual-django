@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% block title %} Produtos - Bulldog {% endblock%}
+{% block cliente %} {{cliente}} {% endblock %}
+{% block login %} {{login}} {%endblock %}
+{% block logout %} {{logout}} {% endblock %}
+{% block content %}
+
+
+  
+<div class="container">
+	
+
+    <header class="d-flex justify-content-center py-3 p-4">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><label class="nav-link">Ordenar
+			<select onchange="ordenar(this)" class="">
+
+				<option selected="" value="">Escolha</option>
+				<option value="crescente">Preço crescente</option>
+				<option value="decrescente">Preço decrescente</option>
+				
+			</select>
+		</label></li>
+
+       
+
+        <li class="nav-item nav-link">{{variacoes|length}} produtos</li>
+
+       
+       
+
+
+      </ul>
+
+    </header>
+
+</div>
+
+<div  class="wrapper">
+
+    <div  class="container mt-0">
+
+        <div id="pai" class="row g-1 ">
+			
+			{% for produto in produtos %}
+			
+            <div id="produtos"  valor="{{produto.preco}}" class="col-md-2 ms-0 me-0">
+
+                <div id="carrinho" class="shadow card card2 p-3 simpleCart_shelfItem text-center rounded">
+                    <div class="align-self-center ">
+						
+						<a href="{% url 'single' produto.id_produto.id_produto%}">
+						<img style="max-width: 100%; background: url({{produto.foto.url}}) no-repeat;" src="{{produto.foto.url}}" class="img-fluid border-0 rounded">
+						</a>  
+					
+					</div>
+
+                    <div class="product-details "><span class="fw-bolder d-block mt-3 mb-2 "><h6 class="fw-light fs-6 text-muted">A partir de:</h6> R$ {{produto.preco}}0</span> 
+						
+						<span class="w-100">{{produto.id_produto.nome}}</span>
+
+                        <div class="buttons d-flex flex-row">
+                           
+
+						<a class="w-100" href="{% url 'single' produto.id_produto.id_produto%}"><button class="btn btn-success cart-button w-100 btn-block ">Ver produto </button></a>
+                        </div>
+						
+                        <div class="weight"></div>
+						
+                    </div>
+                </div>
+            </div>
+			{% empty %}
+			<div class="alert alert-secondary mt-5 mb-5 text-center">Nenhum produto encontrado</div>
+			{% endfor %}
+            
+        </div>
+
+		<nav class="mt-5" aria-label="Page navigation ">
+				<ul class="pagination justify-content-center ">
+				  
+					{% if produtos.has_previous %}
+					  <li class="page-item shadow">
+					<a class="page-link" href="?page={{ produtos.previous_page_number}}" >Anterior</a>
+					</li>
+						{% else %}
+					<li class="page-item disabled shadow">
+					<a class="page-link" href="">Anterior</a>
+						</li>
+					{% endif %}
+
+								  
+					{% if produtos.has_next %}
+					<li class="page-item shadow">
+					<a class="page-link" href="?page={{produtos.next_page_number}}">Próxima</a>
+					</li>
+					{% else %}
+					<li class="page-item disabled shadow">
+					<a class="page-link" href="">Próxima</a>
+					</li>
+					{% endif %}
+				  </li>
+				</ul>
+				<h6 class="text-center">Página {{produtos.number}} de {{produtos.paginator.num_pages}}</h6>
+			  </nav>
+    </div>
+
+</div>
+
+<div style="height: 80px;"></div>
+
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+	document.addEventListener("DOMContentLoaded", function(event) {
+
+
+const cartButtons = document.querySelectorAll('.cart-button');
+
+cartButtons.forEach(button => {
+
+button.addEventListener('click',cartClick);
+
+});
+
+function cartClick(){
+let button =this;
+button.classList.add('clicked');
+}
+
+
+
+});
+</script>
+<script type="text/javascript">
+
+	function ordenar(param) {
+	
+
+	// Seleciona as divs que queremos ordenar
+	var divs = document.querySelectorAll('#pai #produtos');
+
+	var ordem = [].map.call(divs, function(element) {
+		return element;
+	});
+
+	// Ordena a array pelo atributo 'contagem'
+	ordem.sort(function(a,b) {
+		var ca = parseInt(a.getAttribute('valor'), 10);
+		var cb = parseInt(b.getAttribute('valor'), 10);
+
+		
+		if(param.value=="crescente"){
+		return ca - cb;}
+		else if(param.value=="decrescente"){
+		return cb - ca;			}				
+	});
+
+	// Reinsere os filhos no pai, resultando na ordem desejada
+	var container = document.querySelector('#pai');
+	for(var i=0; i<ordem.length; i++) {
+		container.appendChild(ordem[i]);   
+	}
+	
+
+
+	}
+
+</script>
+<script>
+/* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  
+}
+
+/* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  
+}
+
+	</script>
+{% endblock script %}
+
